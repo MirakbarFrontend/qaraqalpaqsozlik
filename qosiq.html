@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qaraqalpaq Qo‘shiqlari</title>
+  <link rel="stylesheet" href="qosıq.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎵 Qaraqalpaq_sózlik</h1>
+
+    <input type="text" id="searchInput" placeholder="Sózlik atı,  kategoriya boyınsha izleń...">
+
+    <div class="categories">
+      <button onclick="filterSongs('all')">Hámmesi</button>
+      <button onclick="filterSongs('modern')">A háribi</button>
+      <button onclick="filterSongs('folk')">B háribi</button>
+      <button onclick="filterSongs('jaz')">D háribi</button>
+      <button onclick="filterSongs('music')">E háribi</button>
+      <button onclick="filterSongs('classic')">G háribi</button>
+      <button onclick="filterSongs('jozeff')">Ǵ háribi</button>
+      <button onclick="filterSongs('fill')">J háribi</button>
+      <button onclick="filterSongs('note')">Z háribi</button>
+      <button onclick="filterSongs('click')">I háribi</button>
+      <button onclick="filterSongs('pen')">Y háribi</button>
+      <button onclick="filterSongs('krish')">K háribi</button>
+      <button onclick="filterSongs('quen')">Q háribi</button>
+      <button onclick="filterSongs('lirika')">L háribi</button>
+    </div>
+
+    <div class="song-list" id="songList">
+      <!-- Qo‘shiqlar shu yerga JS orqali yuklanadi -->
+    </div>
+  </div>
+
+  <script src="qosıq.js"></script>
+</body>
+</html>
+
+

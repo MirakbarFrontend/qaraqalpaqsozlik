@@ -1,0 +1,1 @@
+# qaraqalpaq-sozlik

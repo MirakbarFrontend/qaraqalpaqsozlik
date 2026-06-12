@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qorli Web Fon</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #1e3c72, #2a5298);
+      height: 100vh;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      user-select: none;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const snowCount = 100;
+  for (let i = 0; i < snowCount; i++) {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.textContent = '❄';
+    snowflake.style.left = Math.random() * 100 + 'vw';
+    snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+    snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    snowflake.style.animationDelay = Math.random() * 5 + 's';
+    document.body.appendChild(snowflake);
+  }
+</script>
+
+</body>
+</html>

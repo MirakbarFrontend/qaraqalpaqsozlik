@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="uz">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Shaxsiy Kabinet</title>
+		<style>
+			body {
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				margin: 0;
+				background: linear-gradient(135deg, #2980b9, #6dd5fa);
+				color: #333;
+			}
+			.dashboard {
+				max-width: 700px;
+				margin: 50px auto;
+				background: #fff;
+				padding: 30px;
+				border-radius: 12px;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+			}
+			.dashboard h1 {
+				color: #2c3e50;
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			.info {
+				display: grid;
+				grid-template-columns: 1fr 2fr;
+				row-gap: 15px;
+				column-gap: 10px;
+			}
+			.info label {
+				font-weight: bold;
+				color: #555;
+			}
+			.info span {
+				color: #000;
+			}
+			.logout-btn {
+				display: block;
+				margin: 30px auto 0;
+				padding: 10px 20px;
+				background-color: #e74c3c;
+				color: #fff;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 16px;
+			}
+			.logout-btn:hover {
+				background-color: #c0392b;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="dashboard">
+			<h1>Shaxsiy Kabinet 🎉</h1>
+			<div class="info">
+				<label>Ismingiz:</label><span id="userName">Yuklanyapti...</span> <label>Email:</label
+				><span id="userEmail">Yuklanyapti...</span> <label>Roʻyxatdan oʻtgan vaqt:</label
+				><span id="userTime">Yuklanyapti...</span>
+			</div>
+			<button class="logout-btn" onclick="logout()">Chiqish</button>
+		</div>
+
+		<script type="module">
+			import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+			import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
+
+			const firebaseConfig = {
+				apiKey: 'AIzaSyBswBMDpNPgfpaOqY4S8Vu0PVLkFEqrjkk',
+				authDomain: 'dizimnen-otiw.firebaseapp.com',
+				projectId: 'dizimnen-otiw',
+				storageBucket: 'dizimnen-otiw.firebasestorage.app',
+				messagingSenderId: '254101190553',
+				appId: '1:254101190553:web:446332fe4c63973ea4c508',
+				measurementId: 'G-Y6JEDTY148',
+			};
+
+			const app = initializeApp(firebaseConfig);
+			const auth = getAuth(app);
+
+			onAuthStateChanged(auth, user => {
+				if (user) {
+					document.getElementById('userName').textContent = user.displayName || 'Ism kiritilmagan';
+					document.getElementById('userEmail').textContent = user.email;
+					document.getElementById('userTime').textContent = new Date(user.metadata.creationTime).toLocaleString();
+				} else {
+					window.location.href = 'login.html';
+				}
+			});
+
+			window.logout = function () {
+				signOut(auth).then(() => {
+					window.location.href = 'login.html';
+				});
+			};
+		</script>
+	</body>
+</html>

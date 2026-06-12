@@ -1,0 +1,116 @@
+	<!doctype html>
+<html lang="uz">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Admin Panel - Fikrlar</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<style>
+			body {
+				background: linear-gradient(to right, #ede7f6, #f3e5f5);
+				padding: 20px;
+				font-family: Arial, sans-serif;
+			}
+			.container {
+				background: white;
+				border-radius: 12px;
+				padding: 30px;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+			}
+			h2 {
+				color: #6a1b9a;
+				margin-bottom: 20px;
+			}
+			.table th {
+				background-color: #ce93d8;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			// Admin parolini bu yerda belgilaysiz
+			const adminPassword = 'Tiger007zxt';
+
+			const userInput = prompt('Admin parolni kiriting:');
+			if (userInput !== adminPassword) {
+				alert('Noto‘g‘ri parol! Siz sahifaga kira olmaysiz.');
+				window.location.href = 'index.html'; // yoki boshqa ochiq sahifa
+			}
+		</script>
+
+		<div class="container">
+			<h2>Admin Panel – Fikrlar va Reytinglar</h2>
+			<p><strong>Ortalama reyting:</strong> <span id="avg-rating">Hisoblanmoqda...</span></p>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped align-middle">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Ism</th>
+							<th>Reyting</th>
+							<th>Fikr</th>
+							<th>Vaqti</th>
+						</tr>
+					</thead>
+					<tbody id="feedback-table-body">
+						<!-- Fikrlar shu yerga chiqadi -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Firebase SDK -->
+		<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+		<!-- JS kod -->
+		<script>
+			const firebaseConfig = {
+				apiKey: 'AIzaSyDAY094J109dWXSPbLDgz14spcsm-L3jVU',
+				authDomain: 'pikir-usinis.firebaseapp.com',
+				projectId: 'pikir-usinis',
+				storageBucket: 'pikir-usinis.firebasestorage.app',
+				messagingSenderId: '103211868669',
+				appId: '1:103211868669:web:d995961d91430255b6f994',
+				measurementId: 'G-L5FSSGL6YQ',
+			};
+
+			firebase.initializeApp(firebaseConfig);
+			const db = firebase.firestore();
+
+			const tbody = document.getElementById('feedback-table-body');
+			const avgRatingSpan = document.getElementById('avg-rating');
+
+			db.collection('feedbacks')
+				.orderBy('timestamp', 'desc')
+				.onSnapshot(snapshot => {
+					tbody.innerHTML = '';
+					let total = 0;
+					let count = 0;
+					let index = 1;
+
+					snapshot.forEach(doc => {
+						const data = doc.data();
+						const row = document.createElement('tr');
+
+						row.innerHTML = `
+        <td>${index++}</td>
+        <td>${data.name}</td>
+        <td>${data.rating} ⭐</td>
+        <td>${data.comment}</td>
+        <td>${data.timestamp?.toDate().toLocaleString('uz-UZ') || ''}</td>
+      `;
+
+						tbody.appendChild(row);
+
+						total += data.rating;
+						count++;
+					});
+
+					const avg = count > 0 ? (total / count).toFixed(1) : 'Noma’lum';
+					avgRatingSpan.textContent = `${avg} ⭐`;
+				});
+		</script>
+	</body>
+</html>

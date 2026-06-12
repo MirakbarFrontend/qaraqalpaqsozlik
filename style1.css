@@ -1,0 +1,67 @@
+/* Ro'yxatdan O'tish */
+.register-section {
+  padding: 60px 20px;
+  background: linear-gradient(to right, #e0f7fa, #e1bee7);
+  display: flex;
+  justify-content: center;
+}
+
+.register-wrapper {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.register-wrapper h2 {
+  font-size: 2rem;
+  color: #4a148c;
+  margin-bottom: 30px;
+}
+
+.register-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.register-form label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.register-form input:focus {
+  border-color: #7e57c2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(126, 87, 194, 0.4);
+}
+
+.submit-btn {
+  background: #7e57c2;
+  color: white;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: #6a1b9a;
+}

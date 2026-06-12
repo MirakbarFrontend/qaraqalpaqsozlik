@@ -1,0 +1,502 @@
+{
+  "1": {
+    "word": "So'z 1",
+    "meaning": "So'z 1 ning ma'nosi",
+    "example": "Bu yerda so'z 1 ishlatilgan jumla."
+  },
+  "2": {
+    "word": "So'z 2",
+    "meaning": "So'z 2 ning ma'nosi",
+    "example": "Bu yerda so'z 2 ishlatilgan jumla."
+  },
+  "3": {
+    "word": "So'z 3",
+    "meaning": "So'z 3 ning ma'nosi",
+    "example": "Bu yerda so'z 3 ishlatilgan jumla."
+  },
+  "4": {
+    "word": "So'z 4",
+    "meaning": "So'z 4 ning ma'nosi",
+    "example": "Bu yerda so'z 4 ishlatilgan jumla."
+  },
+  "5": {
+    "word": "So'z 5",
+    "meaning": "So'z 5 ning ma'nosi",
+    "example": "Bu yerda so'z 5 ishlatilgan jumla."
+  },
+  "6": {
+    "word": "So'z 6",
+    "meaning": "So'z 6 ning ma'nosi",
+    "example": "Bu yerda so'z 6 ishlatilgan jumla."
+  },
+  "7": {
+    "word": "So'z 7",
+    "meaning": "So'z 7 ning ma'nosi",
+    "example": "Bu yerda so'z 7 ishlatilgan jumla."
+  },
+  "8": {
+    "word": "So'z 8",
+    "meaning": "So'z 8 ning ma'nosi",
+    "example": "Bu yerda so'z 8 ishlatilgan jumla."
+  },
+  "9": {
+    "word": "So'z 9",
+    "meaning": "So'z 9 ning ma'nosi",
+    "example": "Bu yerda so'z 9 ishlatilgan jumla."
+  },
+  "10": {
+    "word": "So'z 10",
+    "meaning": "So'z 10 ning ma'nosi",
+    "example": "Bu yerda so'z 10 ishlatilgan jumla."
+  },
+  "11": {
+    "word": "So'z 11",
+    "meaning": "So'z 11 ning ma'nosi",
+    "example": "Bu yerda so'z 11 ishlatilgan jumla."
+  },
+  "12": {
+    "word": "So'z 12",
+    "meaning": "So'z 12 ning ma'nosi",
+    "example": "Bu yerda so'z 12 ishlatilgan jumla."
+  },
+  "13": {
+    "word": "So'z 13",
+    "meaning": "So'z 13 ning ma'nosi",
+    "example": "Bu yerda so'z 13 ishlatilgan jumla."
+  },
+  "14": {
+    "word": "So'z 14",
+    "meaning": "So'z 14 ning ma'nosi",
+    "example": "Bu yerda so'z 14 ishlatilgan jumla."
+  },
+  "15": {
+    "word": "So'z 15",
+    "meaning": "So'z 15 ning ma'nosi",
+    "example": "Bu yerda so'z 15 ishlatilgan jumla."
+  },
+  "16": {
+    "word": "So'z 16",
+    "meaning": "So'z 16 ning ma'nosi",
+    "example": "Bu yerda so'z 16 ishlatilgan jumla."
+  },
+  "17": {
+    "word": "So'z 17",
+    "meaning": "So'z 17 ning ma'nosi",
+    "example": "Bu yerda so'z 17 ishlatilgan jumla."
+  },
+  "18": {
+    "word": "So'z 18",
+    "meaning": "So'z 18 ning ma'nosi",
+    "example": "Bu yerda so'z 18 ishlatilgan jumla."
+  },
+  "19": {
+    "word": "So'z 19",
+    "meaning": "So'z 19 ning ma'nosi",
+    "example": "Bu yerda so'z 19 ishlatilgan jumla."
+  },
+  "20": {
+    "word": "So'z 20",
+    "meaning": "So'z 20 ning ma'nosi",
+    "example": "Bu yerda so'z 20 ishlatilgan jumla."
+  },
+  "21": {
+    "word": "So'z 21",
+    "meaning": "So'z 21 ning ma'nosi",
+    "example": "Bu yerda so'z 21 ishlatilgan jumla."
+  },
+  "22": {
+    "word": "So'z 22",
+    "meaning": "So'z 22 ning ma'nosi",
+    "example": "Bu yerda so'z 22 ishlatilgan jumla."
+  },
+  "23": {
+    "word": "So'z 23",
+    "meaning": "So'z 23 ning ma'nosi",
+    "example": "Bu yerda so'z 23 ishlatilgan jumla."
+  },
+  "24": {
+    "word": "So'z 24",
+    "meaning": "So'z 24 ning ma'nosi",
+    "example": "Bu yerda so'z 24 ishlatilgan jumla."
+  },
+  "25": {
+    "word": "So'z 25",
+    "meaning": "So'z 25 ning ma'nosi",
+    "example": "Bu yerda so'z 25 ishlatilgan jumla."
+  },
+  "26": {
+    "word": "So'z 26",
+    "meaning": "So'z 26 ning ma'nosi",
+    "example": "Bu yerda so'z 26 ishlatilgan jumla."
+  },
+  "27": {
+    "word": "So'z 27",
+    "meaning": "So'z 27 ning ma'nosi",
+    "example": "Bu yerda so'z 27 ishlatilgan jumla."
+  },
+  "28": {
+    "word": "So'z 28",
+    "meaning": "So'z 28 ning ma'nosi",
+    "example": "Bu yerda so'z 28 ishlatilgan jumla."
+  },
+  "29": {
+    "word": "So'z 29",
+    "meaning": "So'z 29 ning ma'nosi",
+    "example": "Bu yerda so'z 29 ishlatilgan jumla."
+  },
+  "30": {
+    "word": "So'z 30",
+    "meaning": "So'z 30 ning ma'nosi",
+    "example": "Bu yerda so'z 30 ishlatilgan jumla."
+  },
+  "31": {
+    "word": "So'z 31",
+    "meaning": "So'z 31 ning ma'nosi",
+    "example": "Bu yerda so'z 31 ishlatilgan jumla."
+  },
+  "32": {
+    "word": "So'z 32",
+    "meaning": "So'z 32 ning ma'nosi",
+    "example": "Bu yerda so'z 32 ishlatilgan jumla."
+  },
+  "33": {
+    "word": "So'z 33",
+    "meaning": "So'z 33 ning ma'nosi",
+    "example": "Bu yerda so'z 33 ishlatilgan jumla."
+  },
+  "34": {
+    "word": "So'z 34",
+    "meaning": "So'z 34 ning ma'nosi",
+    "example": "Bu yerda so'z 34 ishlatilgan jumla."
+  },
+  "35": {
+    "word": "So'z 35",
+    "meaning": "So'z 35 ning ma'nosi",
+    "example": "Bu yerda so'z 35 ishlatilgan jumla."
+  },
+  "36": {
+    "word": "So'z 36",
+    "meaning": "So'z 36 ning ma'nosi",
+    "example": "Bu yerda so'z 36 ishlatilgan jumla."
+  },
+  "37": {
+    "word": "So'z 37",
+    "meaning": "So'z 37 ning ma'nosi",
+    "example": "Bu yerda so'z 37 ishlatilgan jumla."
+  },
+  "38": {
+    "word": "So'z 38",
+    "meaning": "So'z 38 ning ma'nosi",
+    "example": "Bu yerda so'z 38 ishlatilgan jumla."
+  },
+  "39": {
+    "word": "So'z 39",
+    "meaning": "So'z 39 ning ma'nosi",
+    "example": "Bu yerda so'z 39 ishlatilgan jumla."
+  },
+  "40": {
+    "word": "So'z 40",
+    "meaning": "So'z 40 ning ma'nosi",
+    "example": "Bu yerda so'z 40 ishlatilgan jumla."
+  },
+  "41": {
+    "word": "So'z 41",
+    "meaning": "So'z 41 ning ma'nosi",
+    "example": "Bu yerda so'z 41 ishlatilgan jumla."
+  },
+  "42": {
+    "word": "So'z 42",
+    "meaning": "So'z 42 ning ma'nosi",
+    "example": "Bu yerda so'z 42 ishlatilgan jumla."
+  },
+  "43": {
+    "word": "So'z 43",
+    "meaning": "So'z 43 ning ma'nosi",
+    "example": "Bu yerda so'z 43 ishlatilgan jumla."
+  },
+  "44": {
+    "word": "So'z 44",
+    "meaning": "So'z 44 ning ma'nosi",
+    "example": "Bu yerda so'z 44 ishlatilgan jumla."
+  },
+  "45": {
+    "word": "So'z 45",
+    "meaning": "So'z 45 ning ma'nosi",
+    "example": "Bu yerda so'z 45 ishlatilgan jumla."
+  },
+  "46": {
+    "word": "So'z 46",
+    "meaning": "So'z 46 ning ma'nosi",
+    "example": "Bu yerda so'z 46 ishlatilgan jumla."
+  },
+  "47": {
+    "word": "So'z 47",
+    "meaning": "So'z 47 ning ma'nosi",
+    "example": "Bu yerda so'z 47 ishlatilgan jumla."
+  },
+  "48": {
+    "word": "So'z 48",
+    "meaning": "So'z 48 ning ma'nosi",
+    "example": "Bu yerda so'z 48 ishlatilgan jumla."
+  },
+  "49": {
+    "word": "So'z 49",
+    "meaning": "So'z 49 ning ma'nosi",
+    "example": "Bu yerda so'z 49 ishlatilgan jumla."
+  },
+  "50": {
+    "word": "So'z 50",
+    "meaning": "So'z 50 ning ma'nosi",
+    "example": "Bu yerda so'z 50 ishlatilgan jumla."
+  },
+  "51": {
+    "word": "So'z 51",
+    "meaning": "So'z 51 ning ma'nosi",
+    "example": "Bu yerda so'z 51 ishlatilgan jumla."
+  },
+  "52": {
+    "word": "So'z 52",
+    "meaning": "So'z 52 ning ma'nosi",
+    "example": "Bu yerda so'z 52 ishlatilgan jumla."
+  },
+  "53": {
+    "word": "So'z 53",
+    "meaning": "So'z 53 ning ma'nosi",
+    "example": "Bu yerda so'z 53 ishlatilgan jumla."
+  },
+  "54": {
+    "word": "So'z 54",
+    "meaning": "So'z 54 ning ma'nosi",
+    "example": "Bu yerda so'z 54 ishlatilgan jumla."
+  },
+  "55": {
+    "word": "So'z 55",
+    "meaning": "So'z 55 ning ma'nosi",
+    "example": "Bu yerda so'z 55 ishlatilgan jumla."
+  },
+  "56": {
+    "word": "So'z 56",
+    "meaning": "So'z 56 ning ma'nosi",
+    "example": "Bu yerda so'z 56 ishlatilgan jumla."
+  },
+  "57": {
+    "word": "So'z 57",
+    "meaning": "So'z 57 ning ma'nosi",
+    "example": "Bu yerda so'z 57 ishlatilgan jumla."
+  },
+  "58": {
+    "word": "So'z 58",
+    "meaning": "So'z 58 ning ma'nosi",
+    "example": "Bu yerda so'z 58 ishlatilgan jumla."
+  },
+  "59": {
+    "word": "So'z 59",
+    "meaning": "So'z 59 ning ma'nosi",
+    "example": "Bu yerda so'z 59 ishlatilgan jumla."
+  },
+  "60": {
+    "word": "So'z 60",
+    "meaning": "So'z 60 ning ma'nosi",
+    "example": "Bu yerda so'z 60 ishlatilgan jumla."
+  },
+  "61": {
+    "word": "So'z 61",
+    "meaning": "So'z 61 ning ma'nosi",
+    "example": "Bu yerda so'z 61 ishlatilgan jumla."
+  },
+  "62": {
+    "word": "So'z 62",
+    "meaning": "So'z 62 ning ma'nosi",
+    "example": "Bu yerda so'z 62 ishlatilgan jumla."
+  },
+  "63": {
+    "word": "So'z 63",
+    "meaning": "So'z 63 ning ma'nosi",
+    "example": "Bu yerda so'z 63 ishlatilgan jumla."
+  },
+  "64": {
+    "word": "So'z 64",
+    "meaning": "So'z 64 ning ma'nosi",
+    "example": "Bu yerda so'z 64 ishlatilgan jumla."
+  },
+  "65": {
+    "word": "So'z 65",
+    "meaning": "So'z 65 ning ma'nosi",
+    "example": "Bu yerda so'z 65 ishlatilgan jumla."
+  },
+  "66": {
+    "word": "So'z 66",
+    "meaning": "So'z 66 ning ma'nosi",
+    "example": "Bu yerda so'z 66 ishlatilgan jumla."
+  },
+  "67": {
+    "word": "So'z 67",
+    "meaning": "So'z 67 ning ma'nosi",
+    "example": "Bu yerda so'z 67 ishlatilgan jumla."
+  },
+  "68": {
+    "word": "So'z 68",
+    "meaning": "So'z 68 ning ma'nosi",
+    "example": "Bu yerda so'z 68 ishlatilgan jumla."
+  },
+  "69": {
+    "word": "So'z 69",
+    "meaning": "So'z 69 ning ma'nosi",
+    "example": "Bu yerda so'z 69 ishlatilgan jumla."
+  },
+  "70": {
+    "word": "So'z 70",
+    "meaning": "So'z 70 ning ma'nosi",
+    "example": "Bu yerda so'z 70 ishlatilgan jumla."
+  },
+  "71": {
+    "word": "So'z 71",
+    "meaning": "So'z 71 ning ma'nosi",
+    "example": "Bu yerda so'z 71 ishlatilgan jumla."
+  },
+  "72": {
+    "word": "So'z 72",
+    "meaning": "So'z 72 ning ma'nosi",
+    "example": "Bu yerda so'z 72 ishlatilgan jumla."
+  },
+  "73": {
+    "word": "So'z 73",
+    "meaning": "So'z 73 ning ma'nosi",
+    "example": "Bu yerda so'z 73 ishlatilgan jumla."
+  },
+  "74": {
+    "word": "So'z 74",
+    "meaning": "So'z 74 ning ma'nosi",
+    "example": "Bu yerda so'z 74 ishlatilgan jumla."
+  },
+  "75": {
+    "word": "So'z 75",
+    "meaning": "So'z 75 ning ma'nosi",
+    "example": "Bu yerda so'z 75 ishlatilgan jumla."
+  },
+  "76": {
+    "word": "So'z 76",
+    "meaning": "So'z 76 ning ma'nosi",
+    "example": "Bu yerda so'z 76 ishlatilgan jumla."
+  },
+  "77": {
+    "word": "So'z 77",
+    "meaning": "So'z 77 ning ma'nosi",
+    "example": "Bu yerda so'z 77 ishlatilgan jumla."
+  },
+  "78": {
+    "word": "So'z 78",
+    "meaning": "So'z 78 ning ma'nosi",
+    "example": "Bu yerda so'z 78 ishlatilgan jumla."
+  },
+  "79": {
+    "word": "So'z 79",
+    "meaning": "So'z 79 ning ma'nosi",
+    "example": "Bu yerda so'z 79 ishlatilgan jumla."
+  },
+  "80": {
+    "word": "So'z 80",
+    "meaning": "So'z 80 ning ma'nosi",
+    "example": "Bu yerda so'z 80 ishlatilgan jumla."
+  },
+  "81": {
+    "word": "So'z 81",
+    "meaning": "So'z 81 ning ma'nosi",
+    "example": "Bu yerda so'z 81 ishlatilgan jumla."
+  },
+  "82": {
+    "word": "So'z 82",
+    "meaning": "So'z 82 ning ma'nosi",
+    "example": "Bu yerda so'z 82 ishlatilgan jumla."
+  },
+  "83": {
+    "word": "So'z 83",
+    "meaning": "So'z 83 ning ma'nosi",
+    "example": "Bu yerda so'z 83 ishlatilgan jumla."
+  },
+  "84": {
+    "word": "So'z 84",
+    "meaning": "So'z 84 ning ma'nosi",
+    "example": "Bu yerda so'z 84 ishlatilgan jumla."
+  },
+  "85": {
+    "word": "So'z 85",
+    "meaning": "So'z 85 ning ma'nosi",
+    "example": "Bu yerda so'z 85 ishlatilgan jumla."
+  },
+  "86": {
+    "word": "So'z 86",
+    "meaning": "So'z 86 ning ma'nosi",
+    "example": "Bu yerda so'z 86 ishlatilgan jumla."
+  },
+  "87": {
+    "word": "So'z 87",
+    "meaning": "So'z 87 ning ma'nosi",
+    "example": "Bu yerda so'z 87 ishlatilgan jumla."
+  },
+  "88": {
+    "word": "So'z 88",
+    "meaning": "So'z 88 ning ma'nosi",
+    "example": "Bu yerda so'z 88 ishlatilgan jumla."
+  },
+  "89": {
+    "word": "So'z 89",
+    "meaning": "So'z 89 ning ma'nosi",
+    "example": "Bu yerda so'z 89 ishlatilgan jumla."
+  },
+  "90": {
+    "word": "So'z 90",
+    "meaning": "So'z 90 ning ma'nosi",
+    "example": "Bu yerda so'z 90 ishlatilgan jumla."
+  },
+  "91": {
+    "word": "So'z 91",
+    "meaning": "So'z 91 ning ma'nosi",
+    "example": "Bu yerda so'z 91 ishlatilgan jumla."
+  },
+  "92": {
+    "word": "So'z 92",
+    "meaning": "So'z 92 ning ma'nosi",
+    "example": "Bu yerda so'z 92 ishlatilgan jumla."
+  },
+  "93": {
+    "word": "So'z 93",
+    "meaning": "So'z 93 ning ma'nosi",
+    "example": "Bu yerda so'z 93 ishlatilgan jumla."
+  },
+  "94": {
+    "word": "So'z 94",
+    "meaning": "So'z 94 ning ma'nosi",
+    "example": "Bu yerda so'z 94 ishlatilgan jumla."
+  },
+  "95": {
+    "word": "So'z 95",
+    "meaning": "So'z 95 ning ma'nosi",
+    "example": "Bu yerda so'z 95 ishlatilgan jumla."
+  },
+  "96": {
+    "word": "So'z 96",
+    "meaning": "So'z 96 ning ma'nosi",
+    "example": "Bu yerda so'z 96 ishlatilgan jumla."
+  },
+  "97": {
+    "word": "So'z 97",
+    "meaning": "So'z 97 ning ma'nosi",
+    "example": "Bu yerda so'z 97 ishlatilgan jumla."
+  },
+  "98": {
+    "word": "So'z 98",
+    "meaning": "So'z 98 ning ma'nosi",
+    "example": "Bu yerda so'z 98 ishlatilgan jumla."
+  },
+  "99": {
+    "word": "So'z 99",
+    "meaning": "So'z 99 ning ma'nosi",
+    "example": "Bu yerda so'z 99 ishlatilgan jumla."
+  },
+  "100": {
+    "word": "So'z 100",
+    "meaning": "So'z 100 ning ma'nosi",
+    "example": "Bu yerda so'z 100 ishlatilgan jumla."
+  }
+}

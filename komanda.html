@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Jamoamiz — Interaktiv</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --bg: #f4f4f8;
+      --card: rgba(255,255,255,.85);
+      --text: #121826;
+      --muted: rgba(18,24,38,.72);
+      --line: rgba(18,24,38,.12);
+      --accent: #2f7cff;
+      --accent2: #00d4ff;
+      --shadow: 0 18px 45px rgba(0,0,0,.12);
+      --radius: 18px;
+    }
+    body.dark{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.08);
+      --text: #eaf0ff;
+      --muted: rgba(234,240,255,.75);
+      --line: rgba(255,255,255,.14);
+      --accent: #7c5cff;
+      --accent2: #00d2ff;
+      --shadow: 0 20px 55px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height: 100dvh;
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(47,124,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 80% 10%, rgba(0,212,255,.14), transparent 60%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .wrap{
+      max-width: 1200px;
+      margin:auto;
+      padding: calc(32px + env(safe-area-inset-top)) 18px calc(70px + env(safe-area-inset-bottom));
+      min-height: 100dvh;
+    }
+
+    .topbar{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom: 18px;
+    }
+
+    .title{
+      display:flex;
+      align-items:flex-end;
+      gap:12px;
+    }
+    .title h1{
+      margin:0;
+      font-size: clamp(28px, 3vw, 40px);
+      letter-spacing: .2px;
+    }
+    .badge{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.12);
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .field{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      min-width: 260px;
+    }
+    .field i{color: var(--muted)}
+    .field input{
+      border:none;
+      outline:none;
+      width:100%;
+      background:transparent;
+      color: var(--text);
+      font-size: 14px;
+    }
+    .clear-btn{
+      border:none;
+      background: transparent;
+      color: var(--muted);
+      cursor:pointer;
+      font-size: 16px;
+      padding: 4px;
+      border-radius: 8px;
+      display:none;
+    }
+    .clear-btn.show{ display:inline-flex; }
+    .clear-btn:hover{ color: var(--accent); }
+
+    select, .btn{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.10);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      outline: none;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+    }
+    .btn{
+      display:flex; align-items:center; gap:10px;
+      transition: transform .15s ease;
+    }
+    .btn:active{ transform: scale(.98); }
+    .btn.secondary{
+      background: rgba(255,255,255,.06);
+    }
+
+    .grid{
+      margin-top: 24px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card{
+      grid-column: span 4;
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      transform: translateY(14px);
+      opacity: 0;
+      transition: transform .5s ease, opacity .5s ease;
+    }
+    .card.show{
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(400px 200px at 20% 0%, rgba(47,124,255,.35), transparent 60%),
+                  radial-gradient(400px 200px at 80% 20%, rgba(0,212,255,.28), transparent 60%);
+      opacity:.35;
+      pointer-events:none;
+    }
+
+    .card-inner{
+      position:relative;
+      padding: 18px 18px 16px;
+      display:flex;
+      gap:14px;
+      flex-direction:column;
+      height:100%;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+    }
+
+    .head{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .avatar{
+      width: 78px;
+      height: 78px;
+      border-radius: 20px;
+      overflow:hidden;
+      border: 2px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+      flex: 0 0 auto;
+      background: rgba(255,255,255,.10);
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .meta h2{
+      margin:0;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+    .meta .role{
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top: 10px;
+    }
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(255,255,255,.08);
+    }
+
+    .desc{
+      margin: 2px 0 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: .92;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow:hidden;
+    }
+
+    .footer{
+      margin-top:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .social a{
+      text-decoration:none;
+      color: var(--muted);
+      margin-right: 10px;
+      font-size: 18px;
+      transition: color .2s ease, transform .2s ease;
+      display:inline-block;
+    }
+    .social a:hover{ color: var(--accent); transform: translateY(-2px); }
+
+    .more{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.10);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-size: 13px;
+      display:flex; align-items:center; gap:8px;
+    }
+
+    .scroll-top{
+      position: fixed;
+      right: 18px;
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.12);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      display:none;
+      align-items:center;
+      gap:8px;
+      z-index: 40;
+      box-shadow: var(--shadow);
+    }
+    .scroll-top.show{ display:flex; }
+
+    /* Hover 3D (light) */
+    .card:hover{
+      transform: translateY(-2px);
+    }
+
+    /* Empty state */
+    .empty{
+      grid-column: 1 / -1;
+      padding: 26px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      background: rgba(255,255,255,.06);
+      text-align:center;
+    }
+
+    /* Modal */
+    .modal{
+      position: fixed;
+      inset: 0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      background: rgba(0,0,0,.55);
+      z-index: 50;
+    }
+    .modal.open{ display:flex; }
+    .modal-box{
+      width: min(760px, 100%);
+      max-height: min(90dvh, 760px);
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .modal-top strong{ font-size: 15px; }
+    .x{
+      border:none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 22px;
+      cursor:pointer;
+      padding: 6px 10px;
+      border-radius: 12px;
+    }
+    .x:hover{ background: rgba(255,255,255,.08); color: var(--text); }
+
+    .modal-body{
+      display:flex;
+      gap: 16px;
+      padding: 16px;
+      flex-wrap:wrap;
+      overflow:auto;
+    }
+    .modal-body .big{
+      width: 110px; height: 110px;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.10);
+      flex: 0 0 auto;
+    }
+    .modal-body .big img{ width:100%; height:100%; object-fit:cover; }
+    .modal-info{
+      flex: 1 1 260px;
+      min-width: 260px;
+    }
+    .modal-info h2{ margin:0; font-size: 22px; }
+    .modal-info .role{ margin: 6px 0 10px; color: var(--muted); }
+    .modal-info p{ margin:0; line-height: 1.75; color: var(--text); opacity: .92; }
+
+    .modal-links{
+      padding: 0 16px 16px;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .chip{
+      text-decoration:none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.10);
+      padding: 10px 12px;
+      border-radius: 14px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      font-size: 14px;
+    }
+    .chip i{ color: var(--muted); }
+
+    @media (max-width: 980px){
+      .card{ grid-column: span 6; }
+    }
+    @media (max-width: 720px){
+      .topbar{ position: sticky; top: 0; padding: 12px 0; background: rgba(0,0,0,0); z-index: 10; }
+      .topbar::before{
+        content:"";
+        position:absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(15,20,32,.9), rgba(15,20,32,0));
+        opacity: .06;
+        pointer-events:none;
+      }
+    }
+    @media (max-width: 620px){
+      .field{ min-width: 100%; }
+      .card{ grid-column: span 12; }
+      .topbar{ align-items:stretch; }
+      .title{ width:100%; justify-content:space-between; }
+      .controls{ width:100%; }
+      select, .btn{ width:100%; }
+      .modal-box{ max-height: 92dvh; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="title">
+        <h1>Biziń komanda</h1>
+        <span class="badge" id="countBadge">0 adam</span>
+      </div>
+
+      <div class="controls">
+        <div class="field">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="search" type="text" placeholder="Izlew: atı, rolı, málimeti..." />
+          <button class="clear-btn" id="clearSearch" aria-label="Izlewdi tazalaw">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </button>
+        </div>
+
+        <select id="roleFilter" title="Rol boyınsha filter">
+          <option value="all">Hámmesi</option>
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+          <option value="mentor">Mentor</option>
+          <option value="design">Dizayn</option>
+        </select>
+
+        <select id="sort" title="Sortelew">
+          <option value="az">Atı: A–Z</option>
+          <option value="za">Atı: Z–A</option>
+        </select>
+
+        <button class="btn secondary" id="resetFilters" title="Bárin qayta ornatuw">
+          <i class="fa-solid fa-rotate-right"></i>
+          Qayta
+        </button>
+
+        <button class="btn" id="themeBtn" title="Tema">
+          <i class="fa-solid fa-moon"></i>
+          Dark
+        </button>
+      </div>
+    </div>
+
+    <section class="grid" id="grid"></section>
+  </main>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Joqarǵa qaytıw">
+    <i class="fa-solid fa-arrow-up"></i> Joqarǵa
+  </button>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <div class="modal-top">
+        <strong>Profil</strong>
+        <button class="x" id="closeModal" aria-label="Yapıw">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="big"><img id="mImg" alt=""></div>
+        <div class="modal-info">
+          <h2 id="mName">—</h2>
+          <div class="role" id="mRole">—</div>
+          <p id="mDesc">—</p>
+          <div class="tags" id="mTags" style="margin-top:12px"></div>
+        </div>
+      </div>
+      <div class="modal-links" id="mLinks"></div>
+    </div>
+  </div>
+
+  <script>
+    // ====== DATA (keyin xohlasangiz ko'paytiramiz) ======
+    const team = [
+      {
+        id: "atabek",
+        name: "Kóshkinbaev Atabek",
+        role: "Joybar tiykarshısı & Frontend programmist",
+        category: "frontend",
+        img: "atabek.jfif",
+        tags: ["Frontend", "UI/UX", "Founder"],
+        desc: `Qaraqalpaq mámleketlik universiteti 2-kurs studenti, "UNI academy" klubında kompyuter sawatqanlıǵı kursı mentori. "Qaraqalpaq Sózlik" joybarınıń ideya avtorı hám basshısı. Sayt dizayneri, paydalanıwshı interfeysi hám frontend programmist.`,
+        links: [
+          { icon: "fa-telegram", label: "Telegram", url: "https://t.me/atabek_offical01" },
+          { icon: "fa-instagram", label: "Instagram", url: "https://instagram.com/atabekkoshkinbaev?igsh=MTYweGdmZTJ2eTM2ZA==" }
+        ]
+      },
+      {
+        id: "abdirasul",
+        name: "Ótebaev Abdirasul",
+        role: "Backend programmist & texnik xizmetker",
+        category: "backend",
+        img: "abdirasul.jfif",
+        tags: ["Backend", "Firebase", "DevOps"],
+        desc: `Qaraqalpaq mámleketlik universiteti 2-kurs studenti, joybar sheńberinde backend sistemalar hám texnikalıq jumıslar menen shuǵıllanadı. Firebase maǵlıwmatlar bazasın integraciyalaw, sózler hám túsinikler bazasın basqaradı.`,
+        links: [
+          { icon: "fa-telegram", label: "Telegram", url: "https://t.me/Abdirasul_Otebaev" },
+          { icon: "fa-instagram", label: "Instagram", url: "https://www.instagram.com/abdirasul_otebaev?igsh=MWJjeG01NnFqamhrOQ==" }
+        ]
+      },
+
+      // Namuna: yana odam qo'shish uchun shuni copy/paste qiling:
+      // {
+      //   id:"name",
+      //   name:"Familiya Ism",
+      //   role:"Lavozim",
+      //   category:"mentor",
+      //   img:"avatar.jpg",
+      //   tags:["Mentor","SMM"],
+      //   desc:"...",
+      //   links:[{icon:"fa-telegram", label:"Telegram", url:"https://t.me/..."}]
+      // }
+    ];
+
+    // ====== Helpers ======
+    const $ = (s) => document.querySelector(s);
+    const grid = $("#grid");
+    const search = $("#search");
+    const clearSearch = $("#clearSearch");
+    const roleFilter = $("#roleFilter");
+    const sort = $("#sort");
+    const countBadge = $("#countBadge");
+    const themeBtn = $("#themeBtn");
+    const resetFilters = $("#resetFilters");
+    const scrollTop = $("#scrollTop");
+
+    // Theme (localStorage)
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme === "dark") document.body.classList.add("dark");
+    updateThemeBtn();
+
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+      updateThemeBtn();
+    });
+
+    function updateThemeBtn(){
+      const dark = document.body.classList.contains("dark");
+      themeBtn.innerHTML = dark
+        ? `<i class="fa-solid fa-sun"></i> Light`
+        : `<i class="fa-solid fa-moon"></i> Dark`;
+    }
+
+    function toggleClear(){
+      clearSearch.classList.toggle("show", Boolean(search.value.trim()));
+    }
+
+    function resetAll(){
+      search.value = "";
+      roleFilter.value = "all";
+      sort.value = "az";
+      toggleClear();
+      render();
+    }
+
+    // Render
+    function render(){
+      const q = search.value.trim().toLowerCase();
+      const cat = roleFilter.value;
+
+      let list = [...team];
+
+      // filter category
+      if(cat !== "all"){
+        list = list.filter(p => p.category === cat);
+      }
+
+      // search
+      if(q){
+        list = list.filter(p =>
+          (p.name + " " + p.role + " " + p.desc + " " + (p.tags||[]).join(" "))
+            .toLowerCase()
+            .includes(q)
+        );
+      }
+
+      // sort
+      list.sort((a,b) => {
+        const A = a.name.toLowerCase();
+        const B = b.name.toLowerCase();
+        return sort.value === "az" ? A.localeCompare(B) : B.localeCompare(A);
+      });
+
+      countBadge.textContent = `${list.length} adam`;
+
+      grid.innerHTML = "";
+      if(!list.length){
+        grid.innerHTML = `<div class="empty">Hech nárse tabılmadı 😕 Qıdırıw so'zlerin ózgertip kóriń.</div>`;
+        return;
+      }
+
+      for(const p of list){
+        const card = document.createElement("article");
+        card.className = "card";
+        card.dataset.id = p.id;
+
+        card.innerHTML = `
+          <div class="card-inner">
+            <div class="head">
+              <div class="avatar"><img src="${p.img}" alt="${p.name}"></div>
+              <div class="meta">
+                <h2>${p.name}</h2>
+                <div class="role">${p.role}</div>
+                <div class="tags">
+                  ${(p.tags||[]).slice(0,3).map(t => `<span class="tag">${t}</span>`).join("")}
+                </div>
+              </div>
+            </div>
+
+            <p class="desc">${p.desc}</p>
+
+            <div class="footer">
+              <div class="social">
+                ${(p.links||[]).slice(0,2).map(l => `
+                  <a href="${l.url}" target="_blank" rel="noopener">
+                    <i class="fab ${l.icon}"></i>
+                  </a>
+                `).join("")}
+              </div>
+              <button class="more" data-open="${p.id}">
+                Batafsil <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      }
+
+      observeCards();
+    }
+
+    // Scroll reveal with IntersectionObserver
+    let observer;
+    function observeCards(){
+      if(observer) observer.disconnect();
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add("show");
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll(".card").forEach((c, i) => {
+        c.style.transitionDelay = (i * 70) + "ms";
+        observer.observe(c);
+      });
+    }
+
+    // Modal logic
+    const modal = $("#modal");
+    const closeModal = $("#closeModal");
+    const mImg = $("#mImg");
+    const mName = $("#mName");
+    const mRole = $("#mRole");
+    const mDesc = $("#mDesc");
+    const mTags = $("#mTags");
+    const mLinks = $("#mLinks");
+
+    function openModal(id){
+      const p = team.find(x => x.id === id);
+      if(!p) return;
+
+      mImg.src = p.img;
+      mImg.alt = p.name;
+      mName.textContent = p.name;
+      mRole.textContent = p.role;
+      mDesc.textContent = p.desc;
+
+      mTags.innerHTML = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join("");
+
+      mLinks.innerHTML = (p.links||[]).map(l => `
+        <a class="chip" href="${l.url}" target="_blank" rel="noopener">
+          <i class="fab ${l.icon}"></i>
+          ${l.label}
+          <i class="fa-solid fa-up-right-from-square" style="margin-left:auto; opacity:.75"></i>
+        </a>
+      `).join("");
+
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function close(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    closeModal.addEventListener("click", close);
+    modal.addEventListener("click", (e) => {
+      if(e.target === modal) close();
+    });
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") close();
+    });
+
+    // Delegation for "Batafsil"
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-open]");
+      if(btn) openModal(btn.dataset.open);
+    });
+
+    // Controls
+    search.addEventListener("input", () => {
+      toggleClear();
+      render();
+    });
+    clearSearch.addEventListener("click", () => {
+      search.value = "";
+      toggleClear();
+      render();
+      search.focus();
+    });
+    roleFilter.addEventListener("change", render);
+    sort.addEventListener("change", render);
+    resetFilters.addEventListener("click", resetAll);
+
+    // Scroll top
+    window.addEventListener("scroll", () => {
+      scrollTop.classList.toggle("show", window.scrollY > 260);
+    });
+    scrollTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    toggleClear();
+    render();
+  </script>
+</body>
+</html>

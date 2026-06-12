@@ -1,0 +1,1 @@
+{ word: "so'z", meaning: "ma'no", experience: "tajriba" }

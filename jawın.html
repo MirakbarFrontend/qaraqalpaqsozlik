@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yomg‘irli Web Fon</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    }
+
+    .rain {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .drop {
+      position: absolute;
+      bottom: 100%;
+      width: 2px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.6);
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="rain"></div>
+
+  <script>
+    const rain = document.querySelector('.rain');
+    const numDrops = 150;
+
+    for (let i = 0; i < numDrops; i++) {
+      const drop = document.createElement('div');
+      drop.classList.add('drop');
+      drop.style.left = Math.random() * window.innerWidth + 'px';
+      drop.style.animationDuration = 0.5 + Math.random() + 's';
+      drop.style.animationDelay = Math.random() * 5 + 's';
+      rain.appendChild(drop);
+    }
+  </script>
+</body>
+</html>

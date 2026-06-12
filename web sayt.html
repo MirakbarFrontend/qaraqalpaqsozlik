@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qoraqalpoq Tili Tushindirma So'zliki</title>
+    <style>
+        /* Boshqa dizayn o'zgarishlari uchun umumiy reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Menyu dizayni */
+        nav {
+            background-color: #2d2d72;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #1e1e5c;
+        }
+
+        /* Bosh sahifa dizayni */
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: #2d2d72;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* So'z qo'shish bo'limi */
+        .add-word {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .add-word h2 {
+            font-size: 24px;
+            color: #2d2d72;
+        }
+
+        .add-word form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .add-word input, .add-word textarea {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .add-word button {
+            padding: 10px 20px;
+            background-color: #2d2d72;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-word button:hover {
+            background-color: #1e1e5c;
+        }
+
+        /* Profil dizayni */
+        .profile {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .profile h2 {
+            color: #2d2d72;
+        }
+
+        .profile p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigatsiya menyusi -->
+    <nav>
+        <ul>
+            <li><a href="#home">Bosh Sahifa</a></li>
+            <li><a href="#wordsList">So‘zlar Ro‘yxati</a></li>
+            <li><a href="#addWord">So‘z Qo‘shish</a></li>
+            <li><a href="#categories">Kategoriyalar</a></li>
+            <li><a href="#profile">Foydalanuvchi Profil</a></li>
+            <li><a href="#statistics">Statistika</a></li>
+            <li><a href="#comments">Izohlar</a></li>
+            <li><a href="#help">Yordam</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Bosh sahifa bo'limi -->
+    <div class="container" id="home">
+        <div class="hero">
+            <h1>Qoraqalpoq Tili Tushindirma So'zliki</h1>
+            <p>Saytimizda siz so‘zlarning manolarini va tajribalarini o‘rganishingiz mumkin. Qoraqalpoq tilini o‘rganishga yordam beruvchi eng so‘nggi so‘zlar va ma'lumotlar.</p>
+        </div>
+
+        <!-- So'z qo'shish bo'limi -->
+        <div class="add-word" id="addWord">
+            <h2>Yangi So'z Qo‘shish</h2>
+            <form action="#">
+                <input type="text" name="word" placeholder="So‘zni kiriting" required>
+                <textarea name="meaning" rows="4" placeholder="So‘zning ma'nosi" required></textarea>
+                <textarea name="example" rows="4" placeholder="Tajribasi (misol)" required></textarea>
+                <button type="submit">Qo‘shish</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Foydalanuvchi Profil bo'limi -->
+    <div class="profile" id="profile">
+        <h2>Foydalanuvchi Profil</h2>
+        <p>Ismingiz: Atabek Kóshkinbaev</p>
+        <p>Email: atabek@example.com</p>
+    </div>
+
+</body>
+</html>

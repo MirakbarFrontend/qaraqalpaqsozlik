@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>Qaraqalpaq_sózlik - Navbar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .top-navbar {
+      background-color: #4CAF50; /* yashil fon */
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .menu-links {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .menu-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 6px 10px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-links a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+
+    .menu-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-links a:hover {
+      color: #ffffcc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-navbar">
+    <div class="menu-links">
+      <a href="#">Pikir hám usınıs</a>
+      <a href="#">Dizimnen ótiw</a>
+      <a href="#">Sózlerdi izlew</a>
+      <a href="#">Esitiw</a>
+    </div>
+  </div>
+
+</body>
+</html>
