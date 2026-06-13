@@ -62,7 +62,7 @@ Javob formati:
 
 Sóz: ${message}`;
 
-		const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${KEY}`;
+		const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${KEY}`;
 
 		const r = await fetch(url, {
 			method: 'POST',
