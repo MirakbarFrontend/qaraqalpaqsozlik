@@ -8,6 +8,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@google/genai": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -16,4 +17,3 @@
     "undici": "^6.19.8"
   }
 }
-

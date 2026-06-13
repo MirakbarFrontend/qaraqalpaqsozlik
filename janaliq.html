@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="kk">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Yangiliklar – Qaraqalpaq_sózlik</title>
+
+		<style>
+			body {
+				margin: 0;
+				font-family: 'Segoe UI', sans-serif;
+				background: linear-gradient(to right, #fdfbfb, #ebedee);
+				color: #333;
+			}
+
+			.main-header {
+				background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+				color: white;
+				text-align: center;
+				padding: 40px 20px;
+			}
+
+			.main-header h1 {
+				margin-bottom: 10px;
+				font-size: 36px;
+			}
+
+			.news-container {
+				display: flex;
+				flex-direction: column;
+				gap: 30px;
+				padding: 40px 20px;
+				max-width: 1000px;
+				margin: auto;
+			}
+
+			.news-card {
+				background: #fff;
+				border-radius: 12px;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+				overflow: hidden;
+				transition: transform 0.3s ease;
+			}
+
+			.news-card:hover {
+				transform: scale(1.02);
+			}
+
+			.news-image {
+				width: 100%;
+				height: auto;
+				display: block;
+			}
+
+			/* Foydalanuvchi qulayligi uchun rasmni cheklovchi class */
+			.book-image {
+				width: 300px;
+				height: auto;
+				display: block;
+				margin: 0 auto;
+			}
+
+			.news-content {
+				padding: 20px;
+			}
+
+			.news-content h2 {
+				margin-top: 0;
+				color: #2575fc;
+			}
+
+			.date {
+				font-size: 14px;
+				color: #777;
+				margin-top: 10px;
+				display: inline-block;
+			}
+
+			.video-wrapper {
+				position: relative;
+				padding-bottom: 56.25%;
+				height: 0;
+				overflow: hidden;
+			}
+
+			.video-wrapper iframe {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+
+			footer {
+				text-align: center;
+				background-color: #2575fc;
+				color: white;
+				padding: 20px;
+				margin-top: 60px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="main-header">
+			<h1>📰 Qaraqalpaq_sózlik Jańalıqları</h1>
+			<p>Biziń eń sońǵı xabarlarımız hám paydalı jańalıqlar</p>
+		</header>
+
+		<main class="news-container">
+			<!-- Yangilik 1 -->
+			<div class="news-card">
+				<img src="atabek1.jpg" alt="Yangi so‘zlar" class="news-image" />
+				<div class="news-content">
+					<h2>BIZIŃ UNIVERSITET - KELESHEK TIYKARI</h2>
+					<p>
+						Berdaq atındaǵı Qaraqalpaq mámleketlik universiteti - elimiz keleshegi bolǵan jas áwladtıń bárkamal insan bolıp
+						jetilisiwi, zamanagóy bilim hám kónlikpelerge iye qánige bolıp kamalǵa keliwi ushın barlıq imkaniyat hám sharayatlar
+						jaratılǵan jetekshi joqarı bilimlendiriw dárgaylarınan biri bolıp esaplanadı. Bul dárgay tek ǵana bilim orayı emes, al
+						jaslardıń turmısında bekkem ruwxıy tiykar hám insanıylıq qádiriyatlardı qáliplestiretuǵın tárbiya orayı esaplanadı.
+						🤔Universitette házirgi zaman talaplarına tolıq juwap beretuǵın zamanagóy oqıw imaratları, elektron kitapxanalar,
+						kompyuter hám multimedia xanaları, laboratoriyalar, sport kompleksleri, studentler turaq jayları, sonday-aq, jaslar
+						ushın jaratılǵan kóplegen mádeniy hám dóretiwshilik dógerekler jumıs alıp barmaqta. Bul sharayatlar studentlerdiń tek
+						teoriyalıq bilim alıwın emes, al ámeliy kónlikpelerdi tereń iyelewin, bos waqtın mazmunlı ótkeriwin támiyinleydi.
+					</p>
+					<span class="date">01.05.2025</span>
+				</div>
+			</div>
+
+			<!-- Yangilik 2 -->
+			<div class="news-card">
+				<div class="video-wrapper">
+					<iframe src="https://www.youtube.com/embed/Fj9IFX8_BdI" allowfullscreen></iframe>
+				</div>
+				<div class="news-content">
+					<h2>🎥 QMUda Nawrız bayramı baslanıw aldında</h2>
+					<p>Universitetmizde Nawrız bayramı kewilli ótkerildi.</p>
+					<span class="date">30.04.2025</span>
+				</div>
+			</div>
+
+			<!-- Yangilik 3 -->
+			<div class="news-card">
+				<img src="kitab.jpg" alt="Sayt dizayni" class="news-image book-image" />
+				<div class="news-content">
+					<h2>📚 Túsindirme sózlik I-tomındaǵı A háribinen 50 sóz qosıldı</h2>
+					<p>Eski dáwir ádebiyatına tiyisli eń kóp soralǵan sózler endi biziń sózlikte bar.</p>
+					<span class="date">28.04.2025</span>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<p>© 2025 Qaraqalpaq_sózlik. Barlıq huqıqlar qorǵalǵan.</p>
+		</footer>
+	</body>
+</html>

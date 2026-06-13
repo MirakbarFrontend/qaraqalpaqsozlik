@@ -1,213 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pikir hám usınıslar — Interaktiv</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Pikir hám usınıslar — Interaktiv</title>
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+		<!-- Tailwind -->
+		<script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Firebase SDK (compat) -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+		<!-- Firebase SDK (compat) -->
+		<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 
-  <style>
-    /* kichik qo'shimcha chiroy */
-    .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,.75); }
-    .fade-in { animation: fadeIn .25s ease-in-out; }
-    @keyframes fadeIn { from {opacity:0; transform: translateY(6px)} to {opacity:1; transform: translateY(0)} }
-  </style>
-</head>
+		<style>
+			/* kichik qo'shimcha chiroy */
+			.glass {
+				backdrop-filter: blur(10px);
+				background: rgba(255, 255, 255, 0.75);
+			}
+			.fade-in {
+				animation: fadeIn 0.25s ease-in-out;
+			}
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(6px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+		</style>
+	</head>
 
-<body class="min-h-screen bg-gradient-to-br from-indigo-50 via-sky-50 to-purple-50">
-  <div class="max-w-6xl mx-auto p-4 md:p-8">
+	<body class="min-h-screen bg-gradient-to-br from-indigo-50 via-sky-50 to-purple-50">
+		<div class="max-w-6xl mx-auto p-4 md:p-8">
+			<!-- Header -->
+			<header class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+				<div>
+					<h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">Pikir hám usınıslar</h1>
+					<p class="text-gray-600 mt-1">Sayt boyınsha bahalaw, usınıs hám izohlarıńızdı jiberiń.</p>
+				</div>
 
-    <!-- Header -->
-    <header class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-      <div>
-        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">
-          Pikir hám usınıslar
-        </h1>
-        <p class="text-gray-600 mt-1">
-          Sayt boyınsha bahalaw, usınıs hám izohlarıńızdı jiberiń.
-        </p>
-      </div>
+				<!-- Stats card -->
+				<div class="glass rounded-2xl shadow p-4 border border-white/60 w-full md:w-auto">
+					<div class="flex items-center gap-6">
+						<div>
+							<div class="text-sm text-gray-500">Jami izohlar</div>
+							<div id="statTotal" class="text-2xl font-bold text-gray-900">0</div>
+						</div>
+						<div>
+							<div class="text-sm text-gray-500">Orta reyting</div>
+							<div class="flex items-center gap-2">
+								<div id="statAvg" class="text-2xl font-bold text-gray-900">0.0</div>
+								<div class="text-yellow-500" id="statAvgStars">☆☆☆☆☆</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
 
-      <!-- Stats card -->
-      <div class="glass rounded-2xl shadow p-4 border border-white/60 w-full md:w-auto">
-        <div class="flex items-center gap-6">
-          <div>
-            <div class="text-sm text-gray-500">Jami izohlar</div>
-            <div id="statTotal" class="text-2xl font-bold text-gray-900">0</div>
-          </div>
-          <div>
-            <div class="text-sm text-gray-500">Orta reyting</div>
-            <div class="flex items-center gap-2">
-              <div id="statAvg" class="text-2xl font-bold text-gray-900">0.0</div>
-              <div class="text-yellow-500" id="statAvgStars">☆☆☆☆☆</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+			<!-- Layout -->
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+				<!-- Form -->
+				<section class="lg:col-span-1">
+					<div class="glass rounded-2xl shadow p-5 border border-white/60">
+						<h2 class="text-xl font-bold text-gray-900 mb-3">Pikir jiberiw</h2>
 
-    <!-- Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Form -->
-      <section class="lg:col-span-1">
-        <div class="glass rounded-2xl shadow p-5 border border-white/60">
-          <h2 class="text-xl font-bold text-gray-900 mb-3">Pikir jiberiw</h2>
+						<form id="feedbackForm" class="space-y-4">
+							<div>
+								<label class="block font-semibold mb-1 text-gray-800" for="userName">Atı fámilyası</label>
+								<input
+									id="userName"
+									type="text"
+									required
+									class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+									placeholder="Mısalı: Atabek Kóshkinbaev" />
+							</div>
 
-          <form id="feedbackForm" class="space-y-4">
-            <div>
-              <label class="block font-semibold mb-1 text-gray-800" for="userName">Atı fámilyası</label>
-              <input id="userName" type="text" required
-                class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Mısalı: Atabek Kóshkinbaev" />
-            </div>
+							<div>
+								<label class="block font-semibold mb-1 text-gray-800" for="rating">Bahalaw (1-5)</label>
+								<div class="flex items-center gap-3">
+									<select
+										id="rating"
+										required
+										class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+										<option value="">Bahalań</option>
+										<option value="1">1 ⭐</option>
+										<option value="2">2 ⭐⭐</option>
+										<option value="3">3 ⭐⭐⭐</option>
+										<option value="4">4 ⭐⭐⭐⭐</option>
+										<option value="5">5 ⭐⭐⭐⭐⭐</option>
+									</select>
 
-            <div>
-              <label class="block font-semibold mb-1 text-gray-800" for="rating">Bahalaw (1-5)</label>
-              <div class="flex items-center gap-3">
-                <select id="rating" required
-                  class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                  <option value="">Bahalań</option>
-                  <option value="1">1 ⭐</option>
-                  <option value="2">2 ⭐⭐</option>
-                  <option value="3">3 ⭐⭐⭐</option>
-                  <option value="4">4 ⭐⭐⭐⭐</option>
-                  <option value="5">5 ⭐⭐⭐⭐⭐</option>
-                </select>
+									<div id="liveStars" class="text-yellow-500 text-lg select-none">☆☆☆☆☆</div>
+								</div>
+							</div>
 
-                <div id="liveStars" class="text-yellow-500 text-lg select-none">☆☆☆☆☆</div>
-              </div>
-            </div>
+							<div>
+								<label class="block font-semibold mb-1 text-gray-800" for="category">Kategoriya</label>
+								<select
+									id="category"
+									required
+									class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+									<option value="">Kategoriya tanlań</option>
+									<option value="Sayt dizayni">Sayt dizayni</option>
+									<option value="Foydalanuvchi tajribasi">Paydalanıwshı tájiriybesi</option>
+									<option value="Texnik muammolar">Texnik mashqalalar</option>
+									<option value="Boshqa">Basqa</option>
+								</select>
+							</div>
 
-            <div>
-              <label class="block font-semibold mb-1 text-gray-800" for="category">Kategoriya</label>
-              <select id="category" required
-                class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option value="">Kategoriya tanlań</option>
-                <option value="Sayt dizayni">Sayt dizayni</option>
-                <option value="Foydalanuvchi tajribasi">Paydalanıwshı tájiriybesi</option>
-                <option value="Texnik muammolar">Texnik mashqalalar</option>
-                <option value="Boshqa">Basqa</option>
-              </select>
-            </div>
+							<div>
+								<label class="block font-semibold mb-1 text-gray-800" for="comment">Pikir (izoh)</label>
+								<textarea
+									id="comment"
+									rows="4"
+									required
+									class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+									placeholder="Pikirińızdı jazıń..."></textarea>
+								<div class="text-xs text-gray-500 mt-1" id="charCount">0 / 400</div>
+							</div>
 
-            <div>
-              <label class="block font-semibold mb-1 text-gray-800" for="comment">Pikir (izoh)</label>
-              <textarea id="comment" rows="4" required
-                class="w-full p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Pikirińızdı jazıń..."></textarea>
-              <div class="text-xs text-gray-500 mt-1" id="charCount">0 / 400</div>
-            </div>
+							<div class="flex items-center gap-3">
+								<input id="sendToTelegram" type="checkbox" class="w-4 h-4 accent-indigo-600" checked />
+								<label for="sendToTelegram" class="text-sm text-gray-700">
+									Telegram botqa da jiberilsin (@atabekkoshkinbaev_bot)
+								</label>
+							</div>
 
-            <div class="flex items-center gap-3">
-              <input id="sendToTelegram" type="checkbox" class="w-4 h-4 accent-indigo-600" checked />
-              <label for="sendToTelegram" class="text-sm text-gray-700">
-                Telegram botqa da jiberilsin (@atabekkoshkinbaev_bot)
-              </label>
-            </div>
+							<button
+								id="submitBtn"
+								type="submit"
+								class="w-full bg-indigo-600 text-white py-2.5 rounded-xl hover:bg-indigo-700 transition font-semibold shadow">
+								Pikirdi jiberiw
+							</button>
 
-            <button id="submitBtn" type="submit"
-              class="w-full bg-indigo-600 text-white py-2.5 rounded-xl hover:bg-indigo-700 transition font-semibold shadow">
-              Pikirdi jiberiw
-            </button>
+							<p class="text-xs text-gray-500">Eslatma: Telegramğa jiberiw ushın <b>BOT_TOKEN</b> hám <b>CHAT_ID</b> kerek.</p>
+						</form>
 
-            <p class="text-xs text-gray-500">
-              Eslatma: Telegramğa jiberiw ushın <b>BOT_TOKEN</b> hám <b>CHAT_ID</b> kerek.
-            </p>
-          </form>
+						<!-- Toast -->
+						<div id="toast" class="hidden mt-4 p-3 rounded-xl text-sm"></div>
+					</div>
 
-          <!-- Toast -->
-          <div id="toast" class="hidden mt-4 p-3 rounded-xl text-sm"></div>
-        </div>
+					<!-- Top feedbacks -->
+					<div class="glass rounded-2xl shadow p-5 border border-white/60 mt-6">
+						<h3 class="text-lg font-bold text-gray-900 mb-3">🔥 Top pikirler</h3>
+						<div id="topList" class="space-y-3 text-sm text-gray-700">
+							<div class="text-gray-500">Házirshe bos...</div>
+						</div>
+					</div>
+				</section>
 
-        <!-- Top feedbacks -->
-        <div class="glass rounded-2xl shadow p-5 border border-white/60 mt-6">
-          <h3 class="text-lg font-bold text-gray-900 mb-3">🔥 Top pikirler</h3>
-          <div id="topList" class="space-y-3 text-sm text-gray-700">
-            <div class="text-gray-500">Házirshe bos...</div>
-          </div>
-        </div>
-      </section>
+				<!-- List + Filters -->
+				<section class="lg:col-span-2">
+					<div class="glass rounded-2xl shadow p-5 border border-white/60">
+						<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+							<h2 class="text-xl font-bold text-gray-900">Izohlar</h2>
 
-      <!-- List + Filters -->
-      <section class="lg:col-span-2">
-        <div class="glass rounded-2xl shadow p-5 border border-white/60">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
-            <h2 class="text-xl font-bold text-gray-900">Izohlar</h2>
+							<div class="flex flex-col justify-center md:flex-row flex-wrap gap-3 w-full md:w-auto">
+								<input
+									id="searchInput"
+									type="text"
+									class="w-full md:w-64 p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+									placeholder="Qıdırıw: atı, izoh, kategoriya..." />
 
-            <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-              <input id="searchInput" type="text"
-                class="w-full md:w-64 p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Qıdırıw: atı, izoh, kategoriya..." />
+								<select
+									id="filterCategory"
+									class="w-full md:w-56 p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+									<option value="all">Kategoriya: Hámmesi</option>
+									<option value="Sayt dizayni">Sayt dizayni</option>
+									<option value="Foydalanuvchi tajribasi">Paydalanıwshı tájiriybesi</option>
+									<option value="Texnik muammolar">Texnik mashqalalar</option>
+									<option value="Boshqa">Basqa</option>
+								</select>
 
-              <select id="filterCategory"
-                class="w-full md:w-56 p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option value="all">Kategoriya: Hámmesi</option>
-                <option value="Sayt dizayni">Sayt dizayni</option>
-                <option value="Foydalanuvchi tajribasi">Paydalanıwshı tájiriybesi</option>
-                <option value="Texnik muammolar">Texnik mashqalalar</option>
-                <option value="Boshqa">Basqa</option>
-              </select>
+								<select
+									id="sortSelect"
+									class="w-full md:w-56 p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+									<option value="newest">Waqıt: Jańa birinshi</option>
+									<option value="oldest">Waqıt: Eski birinshi</option>
+									<option value="ratingHigh">Reyting: Joqarı birinshi</option>
+									<option value="ratingLow">Reyting: Tómengi birinshi</option>
+									<option value="likesHigh">Like: Kóp birinshi</option>
+								</select>
+							</div>
+						</div>
 
-              <select id="sortSelect"
-                class="w-full md:w-56 p-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option value="newest">Waqıt: Jańa birinshi</option>
-                <option value="oldest">Waqıt: Eski birinshi</option>
-                <option value="ratingHigh">Reyting: Joqarı birinshi</option>
-                <option value="ratingLow">Reyting: Tómengi birinshi</option>
-                <option value="likesHigh">Like: Kóp birinshi</option>
-              </select>
-            </div>
-          </div>
+						<div id="feedbackList" class="space-y-4"></div>
 
-          <div id="feedbackList" class="space-y-4"></div>
+						<div id="emptyState" class="hidden text-center text-gray-500 py-10">Hech qanday pikir tabılmadı.</div>
+					</div>
+				</section>
+			</div>
+		</div>
 
-          <div id="emptyState" class="hidden text-center text-gray-500 py-10">
-            Hech qanday pikir tabılmadı.
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+		<script>
+			/**********************
+			 * 1) Firebase config
+			 **********************/
+			const firebaseConfig = {
+				apiKey: 'AIzaSyAm89VWmzax9IZl42cEd1B53_xoUoy9K_M',
+				authDomain: 'pikirreytingapp.firebaseapp.com',
+				databaseURL: 'https://pikirreytingapp-default-rtdb.firebaseio.com',
+				projectId: 'pikirreytingapp',
+				storageBucket: 'pikirreytingapp.firebasestorage.app',
+				messagingSenderId: '809064080199',
+				appId: '1:809064080199:web:0aff9c292187166f0c6262',
+				measurementId: 'G-PX1R2MT5KZ',
+			};
 
-<script>
-  /**********************
-   * 1) Firebase config
-   **********************/
-  const firebaseConfig = {
-    apiKey: "AIzaSyAm89VWmzax9IZl42cEd1B53_xoUoy9K_M",
-    authDomain: "pikirreytingapp.firebaseapp.com",
-    databaseURL: "https://pikirreytingapp-default-rtdb.firebaseio.com",
-    projectId: "pikirreytingapp",
-    storageBucket: "pikirreytingapp.firebasestorage.app",
-    messagingSenderId: "809064080199",
-    appId: "1:809064080199:web:0aff9c292187166f0c6262",
-    measurementId: "G-PX1R2MT5KZ"
-  };
+			firebase.initializeApp(firebaseConfig);
+			const db = firebase.database();
+			const feedbackRef = db.ref('feedbacks');
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-  const feedbackRef = db.ref('feedbacks');
+			/**********************
+			 * 2) Telegram settings
+			 **********************/
+			// ⚠️ TO'LDIRING:
+			const TELEGRAM_BOT_TOKEN = '6716412448:AAHMnqyy1pBDYUSkp1bcl_ozGQLYyfj6-Rk';
+			const TELEGRAM_CHAT_ID = '6578193442'; // shaxsiy chat yoki guruh ID
+			// Bot username: @atabekkoshkinbaev_bot
 
-  /**********************
-   * 2) Telegram settings
-   **********************/
-  // ⚠️ TO'LDIRING:
-  const TELEGRAM_BOT_TOKEN = "6716412448:AAHMnqyy1pBDYUSkp1bcl_ozGQLYyfj6-Rk";
-  const TELEGRAM_CHAT_ID   = "6578193442"; // shaxsiy chat yoki guruh ID
-  // Bot username: @atabekkoshkinbaev_bot
+			async function sendToTelegram(feedback) {
+				// Token/chat_id yo'q bo'lsa, o'tkazib yuboramiz:
+				if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === '6716412448:AAHMnqyy1pBDYUSkp1bcl_ozGQLYyfj6-Rk') return;
 
-  async function sendToTelegram(feedback) {
-    // Token/chat_id yo'q bo'lsa, o'tkazib yuboramiz:
-    if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === "6716412448:AAHMnqyy1pBDYUSkp1bcl_ozGQLYyfj6-Rk") return;
-
-    const text =
-`📩 Yangi pikir keldi!
+				const text = `📩 Yangi pikir keldi!
 👤 Atı: ${feedback.name}
 ⭐ Reyting: ${feedback.rating}/5
 🏷 Kategoriya: ${feedback.category}
@@ -215,110 +235,118 @@
 📝 Izoh:
 ${feedback.comment}`;
 
-    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-    const payload = {
-      chat_id: TELEGRAM_CHAT_ID,
-      text
-    };
+				const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+				const payload = {
+					chat_id: TELEGRAM_CHAT_ID,
+					text,
+				};
 
-    // CORS muammosi bo'lishi mumkin (GitHub Pagesda).
-    // Agar ishlamasa: Render/Vercel server orqali yuborish kerak bo'ladi.
-    try {
-      await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-    } catch (e) {
-      console.warn("Telegram yuborishda xato:", e);
-    }
-  }
+				// CORS muammosi bo'lishi mumkin (GitHub Pagesda).
+				// Agar ishlamasa: Render/Vercel server orqali yuborish kerak bo'ladi.
+				try {
+					await fetch(url, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(payload),
+					});
+				} catch (e) {
+					console.warn('Telegram yuborishda xato:', e);
+				}
+			}
 
-  /**********************
-   * 3) DOM refs
-   **********************/
-  const form = document.getElementById('feedbackForm');
-  const list = document.getElementById('feedbackList');
-  const emptyState = document.getElementById('emptyState');
-  const toast = document.getElementById('toast');
+			/**********************
+			 * 3) DOM refs
+			 **********************/
+			const form = document.getElementById('feedbackForm');
+			const list = document.getElementById('feedbackList');
+			const emptyState = document.getElementById('emptyState');
+			const toast = document.getElementById('toast');
 
-  const filterCategory = document.getElementById('filterCategory');
-  const sortSelect = document.getElementById('sortSelect');
-  const searchInput = document.getElementById('searchInput');
+			const filterCategory = document.getElementById('filterCategory');
+			const sortSelect = document.getElementById('sortSelect');
+			const searchInput = document.getElementById('searchInput');
 
-  const statTotal = document.getElementById('statTotal');
-  const statAvg = document.getElementById('statAvg');
-  const statAvgStars = document.getElementById('statAvgStars');
-  const topList = document.getElementById('topList');
+			const statTotal = document.getElementById('statTotal');
+			const statAvg = document.getElementById('statAvg');
+			const statAvgStars = document.getElementById('statAvgStars');
+			const topList = document.getElementById('topList');
 
-  const ratingSelect = document.getElementById('rating');
-  const liveStars = document.getElementById('liveStars');
-  const commentEl = document.getElementById('comment');
-  const charCount = document.getElementById('charCount');
-  const sendToTelegramCheck = document.getElementById('sendToTelegram');
-  const submitBtn = document.getElementById('submitBtn');
+			const ratingSelect = document.getElementById('rating');
+			const liveStars = document.getElementById('liveStars');
+			const commentEl = document.getElementById('comment');
+			const charCount = document.getElementById('charCount');
+			const sendToTelegramCheck = document.getElementById('sendToTelegram');
+			const submitBtn = document.getElementById('submitBtn');
 
-  /**********************
-   * 4) State
-   **********************/
-  let allFeedbacks = []; // {id, name, rating, comment, category, date, likes, dislikes}
-  let lastSubmitAt = 0;  // simple anti-spam (throttle)
+			/**********************
+			 * 4) State
+			 **********************/
+			let allFeedbacks = []; // {id, name, rating, comment, category, date, likes, dislikes}
+			let lastSubmitAt = 0; // simple anti-spam (throttle)
 
-  /**********************
-   * 5) Helpers
-   **********************/
-  function showToast(message, type="success") {
-    toast.className = "mt-4 p-3 rounded-xl text-sm " + (type === "success"
-      ? "bg-green-100 text-green-800 border border-green-200"
-      : "bg-red-100 text-red-800 border border-red-200");
-    toast.textContent = message;
-    toast.classList.remove('hidden');
-    setTimeout(() => toast.classList.add('hidden'), 3500);
-  }
+			/**********************
+			 * 5) Helpers
+			 **********************/
+			function showToast(message, type = 'success') {
+				toast.className =
+					'mt-4 p-3 rounded-xl text-sm ' +
+					(type === 'success'
+						? 'bg-green-100 text-green-800 border border-green-200'
+						: 'bg-red-100 text-red-800 border border-red-200');
+				toast.textContent = message;
+				toast.classList.remove('hidden');
+				setTimeout(() => toast.classList.add('hidden'), 3500);
+			}
 
-  function formatDate(iso) {
-    const d = new Date(iso);
-    return d.toLocaleString(undefined, { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
-  }
+			function formatDate(iso) {
+				const d = new Date(iso);
+				return d.toLocaleString(undefined, {
+					year: 'numeric',
+					month: '2-digit',
+					day: '2-digit',
+					hour: '2-digit',
+					minute: '2-digit',
+				});
+			}
 
-  function stars(n) {
-    n = Number(n) || 0;
-    return "⭐".repeat(n) + "☆".repeat(5 - n);
-  }
+			function stars(n) {
+				n = Number(n) || 0;
+				return '⭐'.repeat(n) + '☆'.repeat(5 - n);
+			}
 
-  function escapeHtml(str) {
-    return String(str)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
+			function escapeHtml(str) {
+				return String(str)
+					.replaceAll('&', '&amp;')
+					.replaceAll('<', '&lt;')
+					.replaceAll('>', '&gt;')
+					.replaceAll('"', '&quot;')
+					.replaceAll("'", '&#039;');
+			}
 
-  function computeStats() {
-    statTotal.textContent = allFeedbacks.length;
-    if (!allFeedbacks.length) {
-      statAvg.textContent = "0.0";
-      statAvgStars.textContent = "☆☆☆☆☆";
-      return;
-    }
-    const avg = allFeedbacks.reduce((s,f)=>s+Number(f.rating||0),0) / allFeedbacks.length;
-    statAvg.textContent = avg.toFixed(1);
-    const rounded = Math.round(avg);
-    statAvgStars.textContent = stars(rounded);
-  }
+			function computeStats() {
+				statTotal.textContent = allFeedbacks.length;
+				if (!allFeedbacks.length) {
+					statAvg.textContent = '0.0';
+					statAvgStars.textContent = '☆☆☆☆☆';
+					return;
+				}
+				const avg = allFeedbacks.reduce((s, f) => s + Number(f.rating || 0), 0) / allFeedbacks.length;
+				statAvg.textContent = avg.toFixed(1);
+				const rounded = Math.round(avg);
+				statAvgStars.textContent = stars(rounded);
+			}
 
-  function updateTopList() {
-    const top = [...allFeedbacks]
-      .sort((a,b) => (b.likes||0) - (a.likes||0))
-      .slice(0, 3);
+			function updateTopList() {
+				const top = [...allFeedbacks].sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 3);
 
-    if (!top.length) {
-      topList.innerHTML = `<div class="text-gray-500">Házirshe bos...</div>`;
-      return;
-    }
+				if (!top.length) {
+					topList.innerHTML = `<div class="text-gray-500">Házirshe bos...</div>`;
+					return;
+				}
 
-    topList.innerHTML = top.map(f => `
+				topList.innerHTML = top
+					.map(
+						f => `
       <div class="p-3 rounded-xl bg-white/80 border border-white shadow-sm">
         <div class="flex items-center justify-between gap-2">
           <div class="font-semibold text-gray-900 truncate">${escapeHtml(f.name)}</div>
@@ -326,53 +354,55 @@ ${feedback.comment}`;
         </div>
         <div class="text-gray-600 mt-1 line-clamp-2">${escapeHtml(f.comment)}</div>
         <div class="text-xs text-gray-500 mt-2 flex justify-between">
-          <span>👍 ${f.likes||0}</span>
+          <span>👍 ${f.likes || 0}</span>
           <span>${escapeHtml(f.category)}</span>
         </div>
       </div>
-    `).join("");
-  }
+    `,
+					)
+					.join('');
+			}
 
-  /**********************
-   * 6) Render list
-   **********************/
-  function applyFilters() {
-    const cat = filterCategory.value;
-    const sort = sortSelect.value;
-    const q = searchInput.value.trim().toLowerCase();
+			/**********************
+			 * 6) Render list
+			 **********************/
+			function applyFilters() {
+				const cat = filterCategory.value;
+				const sort = sortSelect.value;
+				const q = searchInput.value.trim().toLowerCase();
 
-    let filtered = [...allFeedbacks];
+				let filtered = [...allFeedbacks];
 
-    if (cat !== "all") filtered = filtered.filter(f => f.category === cat);
+				if (cat !== 'all') filtered = filtered.filter(f => f.category === cat);
 
-    if (q) {
-      filtered = filtered.filter(f => {
-        const hay = `${f.name} ${f.comment} ${f.category}`.toLowerCase();
-        return hay.includes(q);
-      });
-    }
+				if (q) {
+					filtered = filtered.filter(f => {
+						const hay = `${f.name} ${f.comment} ${f.category}`.toLowerCase();
+						return hay.includes(q);
+					});
+				}
 
-    filtered.sort((a,b) => {
-      if (sort === "newest") return new Date(b.date) - new Date(a.date);
-      if (sort === "oldest") return new Date(a.date) - new Date(b.date);
-      if (sort === "ratingHigh") return Number(b.rating) - Number(a.rating);
-      if (sort === "ratingLow") return Number(a.rating) - Number(b.rating);
-      if (sort === "likesHigh") return (b.likes||0) - (a.likes||0);
-      return 0;
-    });
+				filtered.sort((a, b) => {
+					if (sort === 'newest') return new Date(b.date) - new Date(a.date);
+					if (sort === 'oldest') return new Date(a.date) - new Date(b.date);
+					if (sort === 'ratingHigh') return Number(b.rating) - Number(a.rating);
+					if (sort === 'ratingLow') return Number(a.rating) - Number(b.rating);
+					if (sort === 'likesHigh') return (b.likes || 0) - (a.likes || 0);
+					return 0;
+				});
 
-    renderList(filtered);
-  }
+				renderList(filtered);
+			}
 
-  function renderList(items) {
-    list.innerHTML = "";
-    emptyState.classList.toggle("hidden", items.length !== 0);
+			function renderList(items) {
+				list.innerHTML = '';
+				emptyState.classList.toggle('hidden', items.length !== 0);
 
-    items.forEach(f => {
-      const li = document.createElement("div");
-      li.className = "fade-in bg-white/85 border border-white rounded-2xl shadow p-4";
+				items.forEach(f => {
+					const li = document.createElement('div');
+					li.className = 'fade-in bg-white/85 border border-white rounded-2xl shadow p-4';
 
-      li.innerHTML = `
+					li.innerHTML = `
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <div class="min-w-0">
             <div class="flex flex-wrap items-center gap-2">
@@ -390,11 +420,11 @@ ${feedback.comment}`;
           <div class="flex items-center gap-2">
             <button data-action="like" data-id="${f.id}"
               class="px-3 py-1.5 rounded-xl border bg-white hover:bg-gray-50 transition text-sm">
-              👍 <span class="font-semibold">${f.likes||0}</span>
+              👍 <span class="font-semibold">${f.likes || 0}</span>
             </button>
             <button data-action="dislike" data-id="${f.id}"
               class="px-3 py-1.5 rounded-xl border bg-white hover:bg-gray-50 transition text-sm">
-              👎 <span class="font-semibold">${f.dislikes||0}</span>
+              👎 <span class="font-semibold">${f.dislikes || 0}</span>
             </button>
           </div>
         </div>
@@ -404,126 +434,123 @@ ${feedback.comment}`;
         </div>
       `;
 
-      list.appendChild(li);
-    });
-  }
+					list.appendChild(li);
+				});
+			}
 
-  /**********************
-   * 7) Realtime load
-   **********************/
-  feedbackRef.on("value", snap => {
-    const data = snap.val() || {};
-    allFeedbacks = Object.entries(data).map(([id, v]) => ({
-      id,
-      name: v.name || "",
-      rating: Number(v.rating||0),
-      comment: v.comment || "",
-      category: v.category || "",
-      date: v.date || new Date().toISOString(),
-      likes: Number(v.likes||0),
-      dislikes: Number(v.dislikes||0),
-    }));
+			/**********************
+			 * 7) Realtime load
+			 **********************/
+			feedbackRef.on('value', snap => {
+				const data = snap.val() || {};
+				allFeedbacks = Object.entries(data).map(([id, v]) => ({
+					id,
+					name: v.name || '',
+					rating: Number(v.rating || 0),
+					comment: v.comment || '',
+					category: v.category || '',
+					date: v.date || new Date().toISOString(),
+					likes: Number(v.likes || 0),
+					dislikes: Number(v.dislikes || 0),
+				}));
 
-    computeStats();
-    updateTopList();
-    applyFilters();
-  });
+				computeStats();
+				updateTopList();
+				applyFilters();
+			});
 
-  /**********************
-   * 8) Like/Dislike handler
-   **********************/
-  list.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-action]");
-    if (!btn) return;
+			/**********************
+			 * 8) Like/Dislike handler
+			 **********************/
+			list.addEventListener('click', e => {
+				const btn = e.target.closest('button[data-action]');
+				if (!btn) return;
 
-    const id = btn.getAttribute("data-id");
-    const action = btn.getAttribute("data-action");
-    const ref = feedbackRef.child(id);
+				const id = btn.getAttribute('data-id');
+				const action = btn.getAttribute('data-action');
+				const ref = feedbackRef.child(id);
 
-    ref.transaction(curr => {
-      if (!curr) return curr;
-      if (action === "like") curr.likes = (curr.likes || 0) + 1;
-      if (action === "dislike") curr.dislikes = (curr.dislikes || 0) + 1;
-      return curr;
-    });
-  });
+				ref.transaction(curr => {
+					if (!curr) return curr;
+					if (action === 'like') curr.likes = (curr.likes || 0) + 1;
+					if (action === 'dislike') curr.dislikes = (curr.dislikes || 0) + 1;
+					return curr;
+				});
+			});
 
-  /**********************
-   * 9) Form interactions
-   **********************/
-  ratingSelect.addEventListener("change", () => {
-    const r = Number(ratingSelect.value || 0);
-    liveStars.textContent = stars(r);
-  });
+			/**********************
+			 * 9) Form interactions
+			 **********************/
+			ratingSelect.addEventListener('change', () => {
+				const r = Number(ratingSelect.value || 0);
+				liveStars.textContent = stars(r);
+			});
 
-  commentEl.addEventListener("input", () => {
-    const max = 400;
-    if (commentEl.value.length > max) commentEl.value = commentEl.value.slice(0, max);
-    charCount.textContent = `${commentEl.value.length} / ${max}`;
-  });
+			commentEl.addEventListener('input', () => {
+				const max = 400;
+				if (commentEl.value.length > max) commentEl.value = commentEl.value.slice(0, max);
+				charCount.textContent = `${commentEl.value.length} / ${max}`;
+			});
 
-  filterCategory.addEventListener("change", applyFilters);
-  sortSelect.addEventListener("change", applyFilters);
-  searchInput.addEventListener("input", applyFilters);
+			filterCategory.addEventListener('change', applyFilters);
+			sortSelect.addEventListener('change', applyFilters);
+			searchInput.addEventListener('input', applyFilters);
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+			form.addEventListener('submit', async e => {
+				e.preventDefault();
 
-    // anti-spam throttle (10s)
-    const now = Date.now();
-    if (now - lastSubmitAt < 10000) {
-      showToast("Iltimos, 10 sekunddan keyin qayta jiberiń 😊", "error");
-      return;
-    }
-    lastSubmitAt = now;
+				// anti-spam throttle (10s)
+				const now = Date.now();
+				if (now - lastSubmitAt < 10000) {
+					showToast('Iltimos, 10 sekunddan keyin qayta jiberiń 😊', 'error');
+					return;
+				}
+				lastSubmitAt = now;
 
-    const name = document.getElementById("userName").value.trim();
-    const rating = Number(document.getElementById("rating").value);
-    const comment = document.getElementById("comment").value.trim();
-    const category = document.getElementById("category").value;
+				const name = document.getElementById('userName').value.trim();
+				const rating = Number(document.getElementById('rating').value);
+				const comment = document.getElementById('comment').value.trim();
+				const category = document.getElementById('category').value;
 
-    if (!name || !rating || !comment || !category) {
-      showToast("Iltimos, barlıq maydanlardı toltırıń!", "error");
-      return;
-    }
+				if (!name || !rating || !comment || !category) {
+					showToast('Iltimos, barlıq maydanlardı toltırıń!', 'error');
+					return;
+				}
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Jiberilip atır...";
+				submitBtn.disabled = true;
+				submitBtn.textContent = 'Jiberilip atır...';
 
-    const feedback = {
-      name,
-      rating,
-      comment,
-      category,
-      date: new Date().toISOString(),
-      likes: 0,
-      dislikes: 0
-    };
+				const feedback = {
+					name,
+					rating,
+					comment,
+					category,
+					date: new Date().toISOString(),
+					likes: 0,
+					dislikes: 0,
+				};
 
-    try {
-      // Firebase ga yozish
-      await feedbackRef.push(feedback);
+				try {
+					// Firebase ga yozish
+					await feedbackRef.push(feedback);
 
-      // Telegram ga yuborish (istasa)
-      if (sendToTelegramCheck.checked) {
-        await sendToTelegram(feedback);
-      }
+					// Telegram ga yuborish (istasa)
+					if (sendToTelegramCheck.checked) {
+						await sendToTelegram(feedback);
+					}
 
-      form.reset();
-      liveStars.textContent = "☆☆☆☆☆";
-      charCount.textContent = "0 / 400";
-      showToast("✅ Pikir tabıslı jiberildi!", "success");
-    } catch (err) {
-      console.error(err);
-      showToast("❌ Xatolik: pikir jiberilmadi.", "error");
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Pikirdi jiberiw";
-    }
-  });
-
-</script>
-
-</body>
+					form.reset();
+					liveStars.textContent = '☆☆☆☆☆';
+					charCount.textContent = '0 / 400';
+					showToast('✅ Pikir tabıslı jiberildi!', 'success');
+				} catch (err) {
+					console.error(err);
+					showToast('❌ Xatolik: pikir jiberilmadi.', 'error');
+				} finally {
+					submitBtn.disabled = false;
+					submitBtn.textContent = 'Pikirdi jiberiw';
+				}
+			});
+		</script>
+	</body>
 </html>
-
