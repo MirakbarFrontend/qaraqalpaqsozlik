@@ -1,1 +1,1 @@
-# qaraqalpaq-sozlik
+# qaraqalpaq-sozlik# qaraqalpaqsozlik
