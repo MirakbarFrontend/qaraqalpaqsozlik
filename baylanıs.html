@@ -887,18 +887,16 @@
 		<script>
 			/***********************
 			 * 1) Firebase Config
-			 * NOTE: keep apiKey/public config here; server-side secrets (service account, Telegram BOT token)
-			 * must NOT be in this file.
+			 * NOTE: keep apiKey/public config here; server-side secrets must NOT be in this file.
 			 ***********************/
 			const firebaseConfig = {
-				apiKey: 'AIzaSyBswBMDpNPgfpaOqY4S8Vu0PVLkFEqrjkk',
-				authDomain: 'dizimnen-otiw.firebaseapp.com',
-				databaseURL: 'https://dizimnen-otiw-default-rtdb.firebaseio.com',
-				projectId: 'dizimnen-otiw',
-				storageBucket: 'dizimnen-otiw.firebasestorage.app',
-				messagingSenderId: '254101190553',
-				appId: '1:254101190553:web:b6590cddbba1491da4c508',
-				measurementId: 'G-R50M9DDWQH',
+				apiKey: 'AIzaSyAcjFsAkdI2VEWEAu3uJ3Slzb1TLjzwmc4',
+				authDomain: 'qoraqalpoqso-zlik.firebaseapp.com',
+				projectId: 'qoraqalpoqso-zlik',
+				storageBucket: 'qoraqalpoqso-zlik.firebasestorage.app',
+				messagingSenderId: '516749515569',
+				appId: '1:516749515569:web:28c1ce5413dba534dc6e10',
+				measurementId: 'G-RM1TK4S6D5',
 			};
 
 			firebase.initializeApp(firebaseConfig);
@@ -964,7 +962,6 @@
 				Object.keys(panels).forEach(k => panels[k].classList.toggle('hidden', k !== name));
 
 				if (name === 'phone') {
-					// ensure recaptcha is ready
 					ensureRecaptcha();
 				}
 			}
@@ -997,7 +994,6 @@
 				if (/[a-z]/.test(pw)) score++;
 				if (/[0-9]/.test(pw)) score++;
 				if (/[^A-Za-z0-9]/.test(pw)) score++;
-				// max 5
 				return score;
 			}
 
@@ -1043,9 +1039,7 @@
 
 				try {
 					const cred = await auth.createUserWithEmailAndPassword(email, pw);
-					// displayName set
 					await cred.user.updateProfile({ displayName: name || 'User' });
-
 					toast('good', 'Tayyor!', "Ro'yxatdan muvaffaqiyatli o'tildi!");
 				} catch (err) {
 					toast('bad', 'Xatolik', err.message || String(err));
@@ -1116,7 +1110,6 @@
 					window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
 						size: 'invisible',
 					});
-					// IMPORTANT: call render() on the window property
 					window.recaptchaVerifier
 						.render()
 						.then(() => {
@@ -1178,127 +1171,7 @@
 			});
 
 			/***********************
-			 * 9) Telegram Login Widget
-			 *  - Client-side widget provides user data
-			 *  - Security: MUST verify on server with bot token.
-			 ***********************/
-			const TELEGRAM_BOT_USERNAME = 'atabekkoshkinbaev_bot'; // <-- siz bergan username (without @)
-			const TELEGRAM_AUTH_ENDPOINT = '/telegram-auth'; // <-- serverda tekshirish endpoint
-			const TELEGRAM_CODE_ENDPOINT = '/telegram-code'; // <-- botdan olingan kodni tekshirish endpoint
-
-			function mountTelegramWidget() {
-				const wrap = $('#tgWidgetWrap');
-				wrap.innerHTML = '';
-
-				if (!TELEGRAM_BOT_USERNAME || TELEGRAM_BOT_USERNAME.includes('@atabekkoshkinbaev_bot')) {
-					const box = document.createElement('div');
-					box.style.border = '1px solid rgba(255,255,255,.14)';
-					box.style.borderRadius = '14px';
-					box.style.padding = '12px';
-					box.style.background = 'rgba(0,0,0,.18)';
-					box.innerHTML = `
-          <b>Telegram sozlama kerak</b>
-          <p class="small" style="margin:6px 0 0 0;">
-            TELEGRAM_BOT_USERNAME ni JS ichida bot usernamiga almashtiring.<br/>
-            Keyin sahifani yangilang.
-          </p>
-        `;
-					wrap.appendChild(box);
-					return;
-				}
-
-				// Telegram script
-				const s = document.createElement('script');
-				s.async = true;
-				s.src = 'https://telegram.org/js/telegram-widget.js?22';
-				s.setAttribute('data-telegram-login', TELEGRAM_BOT_USERNAME);
-				s.setAttribute('data-size', 'large');
-				s.setAttribute('data-userpic', 'true');
-				s.setAttribute('data-radius', '14');
-				// callback
-				s.setAttribute('data-onauth', 'onTelegramAuth(user)');
-				wrap.appendChild(s);
-			}
-
-			// Called by Telegram Widget
-			window.onTelegramAuth = async function (user) {
-				// user: {id, first_name, last_name, username, photo_url, auth_date, hash}
-				toast('good', 'Telegram', 'Telegram ma’lumoti olindi. Serverda tasdiqlash tavsiya!');
-
-				// Real security: send to backend for verification
-				try {
-					const res = await fetch(TELEGRAM_AUTH_ENDPOINT, {
-						method: 'POST',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify(user),
-					});
-
-					if (!res.ok) {
-						// If you don't have backend yet, this will fail — that's normal.
-						const text = await res.text().catch(() => '');
-						throw new Error('Server endpoint topilmadi yoki ruxsat yo‘q. (Demo holat) ' + text);
-					}
-
-					const data = await res.json();
-					// data could contain a custom token, then you can sign in with it:
-					if (data && data.customToken) {
-						await auth.signInWithCustomToken(data.customToken);
-						toast('good', 'Telegram', 'Server tasdiqladi va siz tizimga kirdingiz.');
-					} else {
-						toast('warn', 'Telegram', 'Server ishladi, ammo customToken qaytmadi.');
-					}
-				} catch (err) {
-					toast('warn', 'Telegram demo', err.message || String(err));
-					console.error('onTelegramAuth error', err);
-				}
-			};
-
-			// Open bot deep-link
-			$('#openBotBtn').addEventListener('click', () => {
-				if (!TELEGRAM_BOT_USERNAME || TELEGRAM_BOT_USERNAME.includes('@atabekkoshkinbaev_bot')) {
-					toast('warn', 'Bot username', 'Avval TELEGRAM_BOT_USERNAME ni bot usernamiga almashtiring.');
-					return;
-				}
-				// deep link start param (ixtiyoriy)
-				const url = `https://t.me/${encodeURIComponent(TELEGRAM_BOT_USERNAME)}?start=web_register`;
-				window.open(url, '_blank');
-			});
-
-			// Verify bot code (needs backend)
-			$('#verifyTgCodeBtn').addEventListener('click', async () => {
-				const code = ($('#tgCode').value || '').trim();
-				if (!code) {
-					toast('warn', 'Kod', 'Bot bergan kodni kiriting.');
-					return;
-				}
-				const btn = $('#verifyTgCodeBtn');
-				setLoading(btn, true);
-
-				try {
-					const res = await fetch(TELEGRAM_CODE_ENDPOINT, {
-						method: 'POST',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify({ code }),
-					});
-					if (!res.ok) throw new Error('Server endpoint topilmadi yoki xato.');
-					const data = await res.json();
-
-					// Example: if backend returns Firebase custom token:
-					if (data && data.customToken) {
-						await auth.signInWithCustomToken(data.customToken);
-						toast('good', 'Tasdiq', 'Telegram bot kodi tasdiqlandi (custom token bilan signin).');
-					} else {
-						toast('good', 'Tasdiq', 'Telegram bot kodi tasdiqlandi (server javobi).');
-					}
-				} catch (err) {
-					toast('warn', 'Demo', (err.message || String(err)) + ' (Server qo‘shilmaguncha normal)');
-				} finally {
-					setLoading(btn, false);
-				}
-			});
-
-			/***********************
-			 * 10) Auth State (Profile)
+			 * 9) Auth State (Profile)
 			 ***********************/
 			auth.onAuthStateChanged(user => {
 				const box = $('#profileBox');
@@ -1338,10 +1211,8 @@
 			});
 
 			/***********************
-			 * 11) Init
+			 * 10) Init
 			 ***********************/
-			mountTelegramWidget();
-			// Open default tab
 			openTab('signup');
 		</script>
 	</body>
